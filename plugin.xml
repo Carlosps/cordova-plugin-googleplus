@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="cordova-plugin-googleplus"
-        version="8.5.2">
+        version="9.0.0">
 
   <name>Google SignIn</name>
 
@@ -19,8 +19,8 @@
   <issue>https://github.com/EddyVerbruggen/cordova-plugin-googleplus/issues</issue>
 
   <engines>
-    <engine name="cordova" version=">=7.1.0"/>
-    <engine name="cordova-android" version=">=6.3.0"/>
+    <engine name="cordova" version=">=9.0.0"/>
+    <engine name="cordova-android" version=">=10.0.0"/>
   </engines>
 
   <js-module src="www/GooglePlus.js" name="GooglePlus">
@@ -30,7 +30,7 @@
   <!-- android -->
   <platform name="android">
 
-	<preference name="PLAY_SERVICES_VERSION" default="15.0.1"/>
+	<preference name="PLAY_SERVICES_VERSION" default="21.0.0"/>
     <framework src="com.google.android.gms:play-services-auth:$PLAY_SERVICES_VERSION" />
     <framework src="com.google.android.gms:play-services-identity:$PLAY_SERVICES_VERSION" />
 
@@ -44,7 +44,6 @@
 
     <config-file target="AndroidManifest.xml" parent="/manifest">
       <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-      <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     </config-file>
 
     <source-file src="src/android/GooglePlus.java" target-dir="src/nl/xservices/plugins"/>
@@ -107,8 +106,7 @@
         <source url="https://cdn.cocoapods.org/"/>
       </config>
       <pods use-frameworks="true">
-        <pod name="GoogleSignIn" spec="~> 5.0.2"/>
-        <pod name="GoogleUtilities" spec="~> 7.2.2"/>
+        <pod name="GoogleSignIn" spec="~> 7.0.0"/>
       </pods>
     </podspec>
 

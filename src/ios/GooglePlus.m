@@ -76,13 +76,15 @@
     GIDSignIn *signIn = [GIDSignIn sharedInstance];
     signIn.clientID = clientId;
 
-    [signIn setLoginHint:loginHint];
+    if (loginHint != nil && loginHint.length > 0) {
+        [signIn setLoginHint:loginHint];
+    }
 
     if (serverClientId != nil && offline) {
       signIn.serverClientID = serverClientId;
     }
 
-    if (hostedDomain != nil) {
+    if (hostedDomain != nil && hostedDomain.length > 0) {
         signIn.hostedDomain = hostedDomain;
     }
 
@@ -90,7 +92,7 @@
     signIn.delegate = self;
 
     // default scopes are email and profile
-    if (scopesString != nil) {
+    if (scopesString != nil && scopesString.length > 0) {
         NSArray* scopes = [scopesString componentsSeparatedByString:@" "];
         [signIn setScopes:scopes];
     }
@@ -146,11 +148,11 @@
         CDVPluginResult * pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:_callbackId];
     } else {
-        NSString *email = user.profile.email;
-        NSString *idToken = user.authentication.idToken;
-        NSString *accessToken = user.authentication.accessToken;
-        NSString *refreshToken = user.authentication.refreshToken;
-        NSString *userId = user.userID;
+        NSString *email = user.profile.email ?: @"";
+        NSString *idToken = user.authentication.idToken ?: @"";
+        NSString *accessToken = user.authentication.accessToken ?: @"";
+        NSString *refreshToken = user.authentication.refreshToken ?: @"";
+        NSString *userId = user.userID ?: @"";
         NSString *serverAuthCode = user.serverAuthCode != nil ? user.serverAuthCode : @"";
         NSURL *imageUrl = [user.profile imageURLWithDimension:120]; // TODO pass in img size as param, and try to sync with Android
         NSDictionary *result = @{

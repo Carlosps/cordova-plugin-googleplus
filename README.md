@@ -12,7 +12,13 @@
 [twitter-image]:https://img.shields.io/twitter/follow/eddyverbruggen.svg?style=social&label=Follow%20me
 [twitter-url]:https://twitter.com/eddyverbruggen
 
-> ⚠️ From plugin version 6.0.0 the minimum required cordova-ios version is 4.5.0. Need to use a lower cordova-ios version? Use plugin version 5.3.2 or lower.
+> ⚠️ From plugin version 9.0.0:
+> - Minimum required cordova version is 9.0.0
+> - Minimum required cordova-android version is 10.0.0
+> - Uses GoogleSignInClient API (Android) - GoogleApiClient has been deprecated
+> - Updated Google Play Services to 21.0.0
+> - Updated GoogleSignIn iOS SDK to 7.0.0
+> - Replaced deprecated AsyncTask with ExecutorService
 
 ## 0. Index
 
@@ -416,3 +422,29 @@ Again we have 2 options to whitelist them. Projects that use only the _Google Cl
 2. Select your Android app at the bottom. (if you don't have any, add an android app, you can ignore the whole tutorial they give you, it's irrelevant for Cordova apps)
 3. Add the finger prints to the "SHA certificate fingerprints" section.
 4. Double check your Google Cloud console: [API & Services > credentials](https://console.cloud.google.com/apis/credentials) and see that Firebase has added these automatically at the bottom under "OAuth 2.0 client IDs"
+
+## 11. Changelog
+
+### Version 9.0.0 (2024)
+
+**Major Updates:**
+- **BREAKING CHANGE**: Migrated from deprecated `GoogleApiClient` to `GoogleSignInClient` API (Android)
+- **BREAKING CHANGE**: Updated minimum Cordova version to 9.0.0
+- **BREAKING CHANGE**: Updated minimum cordova-android version to 10.0.0
+- Updated Google Play Services Auth from 15.0.1 to 21.0.0
+- Updated GoogleSignIn iOS SDK from 5.0.2 to 7.0.0
+- Replaced deprecated `AsyncTask` with `ExecutorService` for better compatibility with Android API 30+
+- Removed deprecated `USE_CREDENTIALS` permission (Android)
+- Removed `GoogleUtilities` dependency (iOS) - no longer needed with GoogleSignIn 7.0.0
+- Improved null safety handling in iOS code
+- Fixed duplicate protocol declaration in iOS header file
+
+**Improvements:**
+- Better error handling with proper status codes
+- Improved compatibility with latest Android and iOS SDKs
+- Code cleanup and modernization
+
+**Migration Notes:**
+- If you're upgrading from version 8.x, you may need to update your Cordova and platform versions
+- The Android implementation now uses the modern Google Sign-In API, which is more efficient and reliable
+- No changes required in your JavaScript code - the API remains the same
